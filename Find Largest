@@ -1,0 +1,15 @@
+def findLargest(L):
+    start = 0
+    end = len(L) - 1
+
+    while start < end:
+        mid = (start + end) // 2
+
+        if L[mid] > L[mid + 1]:
+            return L[mid]
+        if L[mid] < L[start]:
+            end = mid - 1
+        else:
+            start = mid + 1
+
+    return L[start]

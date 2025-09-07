@@ -1,0 +1,15 @@
+def odd_one(L):
+    data_types = {type(item) for item in L}
+    
+    if len(data_types) != 2:
+        return None
+
+    Type_List = [type(item) for item in L]
+
+    for item in Type_List:
+        if Type_List.count(item) == 1:
+            return item.__name__
+
+    return None
+    
+print(odd_one(eval(input().strip())))

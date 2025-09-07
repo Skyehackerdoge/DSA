@@ -1,0 +1,20 @@
+from itertools import combinations
+
+def find_Min_Difference(L, P):
+    if len(L) < P:
+        return None
+
+    combinations_list = list(combinations(L, P))
+    min_difference = float('inf')
+
+    for combination in combinations_list:
+        max_value = max(combination)
+        min_value = min(combination)
+        difference = max_value - min_value
+        if difference < min_difference:
+            min_difference = difference
+
+    return min_difference
+L=eval(input().strip())
+P=int(input())
+print(find_Min_Difference(L,P))

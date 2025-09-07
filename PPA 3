@@ -1,0 +1,16 @@
+def binarySearchIndexAndComparisons(L, k):
+    left = 0
+    right = len(L) - 1
+    comparisons = 0
+
+    while left <= right:
+        middle = (left + right) // 2
+        comparisons += 1
+        if L[middle] == k:
+            return True, comparisons
+        elif L[middle] < k:
+            left = middle + 1
+        else:
+            right = middle - 1
+
+    return False, comparisons

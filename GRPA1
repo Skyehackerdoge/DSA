@@ -1,0 +1,17 @@
+def findContinuousRepetitions(t, p):
+    max_repetitions = 0
+    len_p = len(p)
+    
+    for i in range(len(t)):
+        if t[i:i+len_p] == p:  # Check if substring matches pattern
+            repetitions = 1
+            j = i + len_p
+            while j < len(t) and t[j:j+len_p] == p:
+                repetitions += 1
+                j += len_p
+            max_repetitions = max(max_repetitions, repetitions)
+    
+    return max_repetitions
+t = input()
+p = input()
+print(findContinuousRepetitions(t, p))

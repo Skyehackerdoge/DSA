@@ -1,0 +1,20 @@
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+def reverse(root):
+    if root is None or root.next is None:
+        return root
+
+    prev_node = None
+    curr_node = root
+    next_node = None
+
+    while curr_node is not None:
+        next_node = curr_node.next
+        curr_node.next = prev_node
+        prev_node = curr_node
+        curr_node = next_node
+
+    return prev_node

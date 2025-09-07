@@ -1,0 +1,17 @@
+def is_prime(num):
+    if num <= 1:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+def Twin_Primes(n, m):
+    twin_primes = []
+    for num in range(n, m - 1):  # Loop through the range from n to m - 1 (inclusive).
+        if is_prime(num) and is_prime(num + 2):
+            twin_primes.append((num, num + 2))
+    return twin_primes
+n=int(input())
+m=int(input())
+print(sorted(Twin_Primes(n, m)))

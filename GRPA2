@@ -1,0 +1,19 @@
+def FindPattern(T, P):
+    matches = []
+    len_T = len(T)
+    len_P = len(P)
+    
+    for i in range(len_T - len_P + 1):
+        match_found = True
+        for j in range(len_P):
+            if P[j] != '$' and P[j] != T[i+j]:
+                match_found = False
+                break
+        if match_found:
+            matched_pattern = T[i:i+len_P]
+            matches.append((i, matched_pattern))
+    
+    return matches
+T = input()
+P = input()
+print(FindPattern(T,P))

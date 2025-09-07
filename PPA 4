@@ -1,0 +1,13 @@
+def sortInRange(L, r):
+    count_array = [0] * r
+
+    for num in L:
+        count_array[num] += 1
+
+    sorted_list = []
+    for i in range(r):
+        sorted_list.extend([i] * count_array[i])
+
+    return sorted_list
+
+L = list(map(int, input().split()))

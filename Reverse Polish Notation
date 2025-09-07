@@ -1,0 +1,37 @@
+def EvaluateExpression(exp):
+    stack = []
+
+    # Function to perform the given operation
+    def perform_operation(operator, operand2, operand1):
+        if operator == '+':
+            return operand1 + operand2
+        elif operator == '-':
+            return operand1 - operand2
+        elif operator == '*':
+          return operand1 * operand2
+        elif operator == "/":
+          return operand1 / operand2
+        elif operator == "**":
+          return operand1 ** operand2
+        else:
+            raise ValueError("Invalid operator")
+
+    # Iterate through each element in the expression
+    for item in exp.split():
+        if item.isdigit():
+            stack.append(int(item))
+        elif item == '+' or item == '-' or item == '/' or item == '*' or item == '**':
+            operand2 = stack.pop()
+            operand1 = stack.pop()
+            result = perform_operation(item, operand2, operand1)
+            stack.append(result)
+        else:
+            raise ValueError("Invalid item in the expression")
+
+    # The final result is the number left in the stack
+    return stack[0]
+
+# Test the function
+expression = "2 3 1 * + 9 -"
+result = EvaluateExpression(expression)
+print(result)

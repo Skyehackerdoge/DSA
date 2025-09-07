@@ -1,0 +1,36 @@
+def findMasterTank(tanks, pipes):
+    n = len(tanks)  # Number of tanks
+
+    # Create an adjacency list from the pipes
+    adjacency = [[] for _ in range(n)]
+    for pipe in pipes:
+        i, j = pipe
+        i = int(i)
+        j = int(j)
+        adjacency[i-1].append(j-1)
+
+    def dfs(tank, visited):
+        visited[tank] = True
+
+        for neighbor in adjacency[tank]:
+            if not visited[neighbor]:
+                dfs(neighbor, visited)
+
+    # Perform DFS from each tank
+    for tank in range(n):
+        visited = [False] * n
+        dfs(tank, visited)
+
+        # Check if all tanks are reachable from the current tank
+        if all(visited):
+            return tank + 1  # Return the tank number (1-indexed)
+
+    return 0  # No master tank found
+v = [item for item in input().split(" ")]
+#Tanks(vertices) numbered from 1 to n in string format.
+numberOfEdges = int(input())
+e = []
+for i in range(numberOfEdges):
+  s = input().split(" ")
+  e.append((s[0], s[1]))
+print(findMasterTank(v, e))

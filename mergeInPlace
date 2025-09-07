@@ -1,0 +1,80 @@
+#python
+def mergeInPlace(A, B):
+  m = len(A)
+  n = len(B)
+  if (m < 1 or n < 1):
+    return 
+  
+  # Find the smaller list of A and B.
+  for i in range(0, m):
+    # A and B are already sorted. B[0] will always be least in B, 
+    # as we will maintain its sortedness .
+    if (A[i] > B[0]):
+      A.swap(i, B, 0)
+       
+      # move `B[0]` to its correct position in B to maintain the sortedness of B
+      j = 0
+      while(j < n - 1 and B[j] > B[j + 1]):
+        B.swap(j+1, B, j)        
+        j += 1
+
+
+
+#python
+def mergeInPlace(A, B):
+  m = len(A)
+  n = len(B)
+  if (m < 1 or n < 1):
+    return 
+  
+  # Find the smaller list of A and B.
+  for i in range(0, m):
+    # A and B are already sorted. B[0] will always be least in B, 
+    # as we will maintain its sortedness .
+    if (A[i] > B[0]):
+      A.swap(i, B, 0)
+       
+      # move `B[0]` to its correct position in B to maintain the sortedness of B
+      j = 0
+      while(j < n - 1 and B[j] > B[j + 1]):
+        B.swap(j+1, B, j)        
+        j += 1
+
+input_string1 = str(input())
+input_string2 = str(input())
+A = list(map(int, input_string1.split(" ")))
+B = list(map(int, input_string2.split(" ")))
+print (mergeInPlace(A, B))
+
+
+
+def merge(X, Y):
+ 
+    m = len(X)
+    n = len(Y)
+ 
+    for i in range(m):
+        if X[i] > Y[0]:
+ 
+            temp = X[i]
+            X[i] = Y[0]
+            Y[0] = temp
+ 
+            first = Y[0]
+            k = 1
+            while k < n and Y[k] < first:
+                Y[k - 1] = Y[k]
+                k = k + 1
+ 
+            Y[k - 1] = first
+            
+
+input_string = input()
+input_string1 = input()
+integer_array = list(map(int, input_string.split()))
+integer_array1 = list(map(int, input_string1.split()))
+ 
+merge(integer_array, integer_array1)
+ 
+print("X:", integer_array)
+print("Y:", integer_array1)

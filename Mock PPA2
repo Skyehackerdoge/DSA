@@ -1,0 +1,8 @@
+def removeDuplicate(head):
+current = head
+while current and current.next:
+    if current.data == current.next.data:
+        # Skip the next node since it's a duplicate
+        current.next = current.next.next
+    else:
+        current = current.next

@@ -1,0 +1,14 @@
+def countSubseq(S):
+    n = len(S)
+    dp = [0] * 10  # dp[d]: number of subsequences ending with digit d
+    for ch in S:
+        d = int(ch)
+        # Any subsequence ending with smaller digits can be extended by d
+        add = 1  # single digit subsequence [d]
+        for prev in range(d):
+            add += dp[prev]
+        dp[d] += add
+    return sum(dp)
+
+S = input()
+print(countSubseq(S))

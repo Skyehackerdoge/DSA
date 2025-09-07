@@ -1,0 +1,59 @@
+import copy
+def dijkstra(WList,s):
+    infinity = 1 + len(WList.keys())*max([d for u in WList.keys()for (v,d) in WList[u]])
+    (visited,distance) = ({},{})
+    for v in WList.keys():
+        (visited[v],distance[v]) = (False,infinity)       
+    distance[s] = 0    
+    for u in WList.keys():
+        nextd = min([distance[v] for v in WList.keys() if not visited[v]])
+        nextvlist = [v for v in WList.keys() if (not visited[v]) and distance[v] == nextd]
+        if nextvlist == []:
+            break
+        nextv = min(nextvlist)        
+        visited[nextv] = True        
+        for (v,d) in WList[nextv]:
+            if not visited[v]:
+                if distance[v] > distance[nextv] + d:
+                    distance[v] = distance[nextv] + d   
+    return(distance)
+import heapq
+
+def shortestCircularRoute(WList, S):
+    min_cycle = float('inf')
+    for neighbor, edge_dist in WList[S]:
+        # Remove edge S-neighbor from the graph
+        temp = WList[neighbor].copy()
+        WList[neighbor] = [x for x in WList[neighbor] if x[0] != S]
+
+        # Find shortest path from neighbor to S (using Dijkstra)
+        distance = {u: float('inf') for u in WList}
+        distance[neighbor] = 0
+        heap = [(0, neighbor)]
+        while heap:
+            curr_dist, u = heapq.heappop(heap)
+            for v, w in WList[u]:
+                if distance[v] > curr_dist + w:
+                    distance[v] = curr_dist + w
+                    heapq.heappush(heap, (distance[v], v))
+
+        # If there is a path from neighbor to S, update min_cycle
+        if distance[S] != float('inf'):
+            cycle_length = edge_dist + distance[S]
+            min_cycle = min(min_cycle, cycle_length)
+
+        # Restore the edge
+        WList[neighbor] = temp
+    return min_cycle
+
+
+n = int(input())
+edges = eval(input())
+S = int(input())
+WL = {}
+for i in range(n):
+    WL[i] = []
+for ed in edges: #create dictionary for undirected graph
+    WL[ed[0]].append((ed[1],ed[2]))
+    WL[ed[1]].append((ed[0],ed[2]))
+print(shortestCircularRoute(WL,S))
